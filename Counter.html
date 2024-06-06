@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Till 2025</title>
+
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .countdown-container{
+            text-align: center;
+        }
+
+        .countdown-timer{
+            font-size: 36px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .countdown-label{
+            font-size: 18px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="countdown-container">
+        <div class="countdown-timer" id="Countdown"></div>
+        <div class="countdown-label">until 2025</div>
+    </div>
+    <script>
+        const targetDate = new Date('2025-01-01T00:00:00');    // We are setting the target date as 1 january of 2025 at 12 midnight...
+
+
+        function updateCountdown() {
+            const currentDate = new Date();   // To get the current Date
+
+            const timeDifference = targetDate - currentDate;    // To calculate the time difference.. The diference comes in milliseconds..
+
+            const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));   // Calculating remaining number of days
+
+            const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) ;   // Calculating remaining number of hours
+
+            const minutes =  Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60)) ;   // Calculating remaining number of minutes
+ 
+            const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000) ;  // Calculating remaining number of seconds
+
+            document.getElementById('Countdown').innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s` 
+
+
+            setTimeout(updateCountdown,1000)
+        }
+
+        updateCountdown();
+    </script>
+</body>
+
+
+</html>
