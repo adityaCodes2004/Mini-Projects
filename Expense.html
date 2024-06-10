@@ -56,6 +56,12 @@
             background-color: #4caf50;
             color: white;
         }
+        .edit-btn:hover{
+            cursor: pointer;
+        }
+        .delete-btn:hover{
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -79,9 +85,24 @@
         <table id="Expense-Table">
             <thead>
                 <tr>
-                    <th>Description</th>
-                    <th>Category</th>
-                    <th>Amount</th>
+                    <th>Description
+                        <td>
+                            <button class="edit-btn">Edit</button>
+                            <button class="delete-btn">Delete</button>
+                        </td>
+                    </th>
+                    <th>Category
+                        <td>
+                            <button class="edit-btn">Edit</button>
+                            <button class="delete-btn">Delete</button>
+                        </td>
+                    </th>
+                    <th>Amount
+                        <td>
+                            <button class="edit-btn">Edit</button>
+                            <button class="delete-btn">Delete</button>
+                        </td>
+                    </th>
                 </tr>
             </thead>
 
@@ -92,6 +113,8 @@
     <script>
         const expenseForm = document.getElementById('expense-form');
         const expenseList = document.getElementById('Expense-list');
+        const editBtn = document.querySelector('edit-btn');
+        const deleteBtn = document.querySelector('delete-btn');
 
 
         expenseForm.addEventListener('submit',(event) => {
@@ -115,6 +138,34 @@
                 alert('Please fill out all fields with valid Data');
             }
         })
+
+        expenseList.addEventListener('click',(event) =>{
+            if(event.target.classList.contains('editBtn')) {
+                const row  = event.target.closest('tr');
+                editExpense(row);
+            } else if(event.target.classList.contains('deleteBtn')) {
+                const row = event.target.closest('tr');
+                deleteExpense(row);
+            }
+        })
+
+        function editExpense(row) {
+
+            // First the values are extracted
+            const description = row.children[0].innerText;
+            const category = row.children[1].innerText;
+            const amount = row.children[2].innerText;
+            // Populating the form fields with extracted values
+            document.getElementById('description').value = description;
+            document.getElementById('category').value = category;
+            document.getElementById('amount').value = amount;
+            //Removing the row from the table
+            row.remove();
+        }
+
+        function deleteExpense(row) {
+            row.remove();
+        }
             
 
        
